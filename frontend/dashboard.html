@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - TravelAI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://img.icons8.com/fluency/48/null/airplane-take-off.png" type="image/png">
+</head>
+<body>
+    <!-- Theme toggle moved to navbar -->
+
+    <!-- Navigation Bar -->
+    <div id="navbar"></div>
+
+    <main class="dashboard-main">
+        <div class="dashboard-container">
+            <!-- Welcome Banner -->
+            <div class="welcome-banner">
+                <div class="welcome-content">
+                    <h1>Welcome to Your Travel Dashboard</h1>
+                    <p>Plan, organize, and enjoy your trips with AI-powered recommendations</p>
+                    <button id="create-new-trip-btn" class="btn-create-trip animate-pulse-glow">
+                        <span class="btn-icon"><i class="fas fa-plus"></i></span>
+                        <span class="btn-text">Create New Trip</span>
+                    </button>
+                </div>
+                <div class="welcome-image">
+                    <img src="https://img.icons8.com/fluency/240/null/around-the-globe.png" alt="Travel the world">
+                </div>
+            </div>
+            
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-suitcase"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-value" id="trips-count">0</h3>
+                        <p class="stat-label">Total Trips</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-value" id="destinations-count">0</h3>
+                        <p class="stat-label">Destinations</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-value" id="upcoming-count">0</h3>
+                        <p class="stat-label">Upcoming</p>
+                    </div>
+                </div>
+                <!-- Sustainability stat card removed -->
+            </div>
+            
+            <!-- My Trips Section -->
+            <div class="trips-section">
+                <div class="section-header">
+                    <h2>My Trips</h2>
+                    <div class="trips-actions">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="trip-search" placeholder="Search trips...">
+                        </div>
+                        <div class="filter-options">
+                            <select id="trip-status-filter" class="form-select">
+                                <option value="all">All Trips</option>
+                                <option value="upcoming">Upcoming</option>
+                                <option value="past">Past</option>
+                                <option value="planning">Planning</option>
+                            </select>
+                            <select id="trip-sort" class="form-select">
+                                <option value="date-desc">Newest First</option>
+                                <option value="date-asc">Oldest First</option>
+                                <option value="duration">Duration</option>
+                                <option value="budget">Budget</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="trips-grid" id="trips-container">
+                    <!-- Trip cards will be dynamically added here -->
+                    <div class="empty-state" id="empty-trips">
+                        <div class="empty-state-content">
+                            <img src="https://img.icons8.com/fluency/120/null/suitcase.png" alt="No trips">
+                            <h3>No trips found</h3>
+                            <p>Start planning your next adventure!</p>
+                            <button class="btn btn-primary btn-lg" id="empty-create-trip-btn">
+                                <i class="fas fa-plus"></i> Create New Trip
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+    </main>
+
+    <!-- Create Trip Modal -->
+    <div class="modal" id="create-trip-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Trip</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="create-trip-form">
+                    <div class="form-group">
+                        <label for="trip-title">Trip Title</label>
+                        <input type="text" id="trip-title" name="title" placeholder="e.g., Summer in Paris" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="trip-start">Start</label>
+                        <input type="text" id="trip-start" name="start" placeholder="e.g., Mumbai" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="trip-destination">Destination</label>
+                        <input type="text" id="trip-destination" name="destination" placeholder="e.g., Paris, France" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="trip-start-date">Start Date</label>
+                            <input type="date" id="trip-start-date" name="startDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="trip-end-date">End Date</label>
+                            <input type="date" id="trip-end-date" name="endDate" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="trip-budget">Budget (INR)</label>
+                        <input type="number" id="trip-budget" name="budget" placeholder="e.g., 2000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="trip-travelers">Number of Travelers</label>
+                        <input type="number" id="trip-travelers" name="travelers" min="1" value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Travel Style</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="travelStyle" value="adventure"> Adventure
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="travelStyle" value="luxury"> Luxury
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="travelStyle" value="cultural"> Cultural
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="travelStyle" value="relaxation"> Relaxation
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="travelStyle" value="budget"> Budget
+                            </label>
+                        </div>
+                    </div>
+                    <div id="create-trip-error" class="error-message"></div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="cancel-trip-btn">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Create Trip</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer removed as requested -->
+    
+    <!-- Toast container for notifications -->
+    <div id="toast-container" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+    
+    <!-- Loading indicator -->
+    <div id="loading-indicator" class="loading-indicator">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Main JS -->
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

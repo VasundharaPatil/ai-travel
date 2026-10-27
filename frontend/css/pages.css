@@ -1,0 +1,419 @@
+/**
+ * AI Travel Planner - Page-specific styles
+ * Contains styles for individual pages like login, dashboard, itinerary, etc.
+ */
+
+/* Login & Registration Pages */
+.auth-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    padding: 2rem 0;
+}
+
+.auth-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.auth-card {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    width: 100%;
+    max-width: 450px;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+[data-theme="dark"] .auth-card {
+    background-color: var(--background-alt);
+    color: var(--text-color);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.auth-header h2 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.auth-header p {
+    color: var(--text-light);
+}
+
+[data-theme="dark"] .auth-header p {
+    color: var(--text-light);
+    opacity: 0.9;
+}
+
+.auth-form .form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.auth-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 12px 15px;
+    padding-left: 40px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    font-size: 1rem;
+    transition: var(--transition);
+    background-color: var(--white);
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .auth-form input {
+    background-color: var(--background-alt);
+    color: var(--text-light);
+    border-color: var(--border-color);
+}
+
+.auth-form input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(76, 175, 171, 0.2);
+}
+
+.auth-form .form-group i {
+    position: absolute;
+    left: 15px;
+    top: 42px;
+    color: var(--text-light);
+}
+
+.auth-form .password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 42px;
+    cursor: pointer;
+    color: var(--text-light);
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+}
+
+.remember-me input {
+    width: auto;
+    margin-right: 0.5rem;
+}
+
+.forgot-password {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+}
+
+.error-message {
+    color: var(--danger-color);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.auth-separator {
+    display: flex;
+    align-items: center;
+    margin: 1.5rem 0;
+}
+
+.auth-separator::before,
+.auth-separator::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.auth-separator span {
+    padding: 0 10px;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.social-login {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.btn-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: var(--background-alt);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.btn-google:hover {
+    background-color: #f2f2f2;
+    color: #DB4437;
+}
+
+.btn-facebook:hover {
+    background-color: #f2f2f2;
+    color: #4267B2;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.auth-footer p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+/* Dashboard Page */
+.dashboard-header {
+    background-color: var(--background-alt);
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+}
+
+[data-theme="dark"] .dashboard-header {
+    background-color: var(--background-color);
+}
+
+.dashboard-title {
+    margin-bottom: 1rem;
+}
+
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+[data-theme="dark"] .stat-card {
+    background-color: var(--background-alt);
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(76, 175, 171, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.stat-info h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    color: var(--text-color);
+}
+
+.stat-info p {
+    color: var(--text-light);
+    margin: 0;
+}
+
+.dashboard-section {
+    margin-bottom: 3rem;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0;
+}
+
+.trip-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.trip-card {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    background-color: var(--white);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+[data-theme="dark"] .trip-card {
+    background-color: var(--background-alt);
+}
+
+.trip-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow-hover);
+}
+
+.trip-img {
+    height: 180px;
+    overflow: hidden;
+}
+
+.trip-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.trip-card:hover .trip-img img {
+    transform: scale(1.05);
+}
+
+.trip-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.trip-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.trip-date {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.trip-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.trip-tag {
+    background-color: rgba(76, 175, 171, 0.1);
+    color: var(--primary-color);
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.trip-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.trip-budget {
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.trip-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.trip-action-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background-alt);
+    color: var(--text-color);
+    transition: var(--transition);
+}
+
+.trip-action-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    background-color: var(--background-alt);
+    border-radius: var(--border-radius);
+    margin-bottom: 2rem;
+}
+
+[data-theme="dark"] .empty-state {
+    background-color: var(--background-color);
+}
+
+.empty-state-icon {
+    font-size: 3rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+}
+
+.empty-state-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.empty-state-text {
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}

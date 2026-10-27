@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Travel Assistant - TravelAI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/chat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://img.icons8.com/fluency/48/null/airplane-take-off.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+    <!-- Theme toggle moved to navbar -->
+
+    <!-- Navigation Bar -->
+    <div id="navbar"></div>
+
+    <main>
+        <section class="chat-section">
+            <div class="container">
+                <div class="chat-container animate-fade-in">
+                    <div class="chat-sidebar">
+                        <div class="sidebar-header">
+                            <h3><i class="fas fa-robot"></i> AI Travel Assistant</h3>
+                            <button class="btn-icon animate-pulse-glow" id="new-chat-btn" title="New Chat">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="chat-context">
+                            <div class="context-header">
+                                <h4><i class="fas fa-suitcase"></i> Active Trip</h4>
+                                <button class="btn-icon" id="change-trip-btn" title="Change Trip">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </button>
+                            </div>
+                            <div class="active-trip" id="active-trip">
+                                <div class="loading-small">
+                                    <div class="spinner"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chat-history">
+                            <div class="history-header">
+                                <h4><i class="fas fa-history"></i> Recent Conversations</h4>
+                            </div>
+                            <div class="history-list" id="chat-history-list">
+                                <div class="loading-small">
+                                    <div class="spinner"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-main animate-scale-in">
+                        <div class="chat-header">
+                            <div class="chat-title">
+                                <h3 id="chat-title"><i class="fas fa-comments"></i> New Conversation</h3>
+                            </div>
+                            <div class="chat-actions">
+                                <button class="btn-icon" id="save-chat-btn" title="Save Conversation">
+                                    <i class="fas fa-save"></i>
+                                </button>
+                                <button class="btn-icon" id="clear-chat-btn" title="Clear Conversation">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="chat-messages" id="chat-messages">
+                            <div class="message assistant-message welcome-message animate-slide-up">
+                                <div class="message-avatar">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <div class="message-content">
+                                    <div class="message-text">
+                                        <h4>Hello! I'm your AI Travel Assistant.</h4>
+                                        <p>I can help you with:</p>
+                                        <ul>
+                                            <li><i class="fas fa-map-marked-alt"></i> Information about destinations</li>
+                                            <li><i class="fas fa-lightbulb"></i> Travel recommendations and tips</li>
+                                            <li><i class="fas fa-cloud-sun"></i> Weather forecasts for your trip</li>
+                                            <li><i class="fas fa-passport"></i> Visa and entry requirements</li>
+                                            <li><i class="fas fa-money-bill-wave"></i> Currency and payment advice</li>
+                                            <li><i class="fas fa-globe"></i> Local customs and cultural information</li>
+                                        </ul>
+                                        <p>How can I assist with your travel plans today?</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chat-input">
+                            <form id="chat-form">
+                                <div class="input-container">
+                                    <textarea id="message-input" class="form-control" placeholder="Type your message..." rows="1"></textarea>
+                                    <button type="submit" class="send-btn" title="Send Message">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </form>
+                            <div class="suggested-queries">
+                                <button class="query-btn animate-fade-in" data-query="What's the weather like in my destination?">
+                                    <i class="fas fa-cloud-sun"></i> Weather forecast
+                                </button>
+                                <button class="query-btn animate-fade-in" data-query="What are the top attractions in my destination?">
+                                    <i class="fas fa-landmark"></i> Top attractions
+                                </button>
+                                <button class="query-btn animate-fade-in" data-query="Do I need a visa for my destination?">
+                                    <i class="fas fa-passport"></i> Visa requirements
+                                </button>
+                                <button class="query-btn animate-fade-in" data-query="What's the local currency and exchange rate?">
+                                    <i class="fas fa-money-bill-wave"></i> Currency info
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Trip Selection Modal -->
+    <div class="modal itinerary-modal" id="trip-selection-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title"><i class="fas fa-suitcase"></i> Select Active Trip</h3>
+                <button class="btn-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="mb-4">Select a trip to provide context for the AI assistant. This helps the assistant provide more personalized and relevant information.</p>
+                
+                <div class="trip-list animate-fade-in" id="trip-selection-list">
+                    <!-- Trip list will be loaded here -->
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p>Loading your trips...</p>
+                    </div>
+                </div>
+                
+                <div id="trip-selection-error" class="error-message animate-fade-in"></div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-trip-selection-btn">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="no-trip-btn">
+                        <i class="fas fa-check"></i> Continue without a trip
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer removed as requested -->
+    
+    <!-- Toast container for notifications -->
+    <div id="toast-container" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+    
+    <!-- Loading indicator -->
+    <div id="loading-indicator" class="loading-indicator">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Main JS -->
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/chat.js"></script>
+</body>
+</html>

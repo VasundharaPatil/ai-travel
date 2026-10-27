@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Travel Planner - Your Sustainable Travel Companion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://img.icons8.com/fluency/48/null/airplane-take-off.png" type="image/png">
+</head>
+<body>
+    <!-- Theme toggle moved to navbar -->
+
+    <div class="floating-elements">
+        <div class="floating-icon" style="--delay: 0s; --top: 15%; --left: 10%;"><i class="fas fa-plane"></i></div>
+        <div class="floating-icon" style="--delay: 2s; --top: 25%; --left: 85%;"><i class="fas fa-map-marker-alt"></i></div>
+        <div class="floating-icon" style="--delay: 1s; --top: 60%; --left: 5%;"><i class="fas fa-compass"></i></div>
+        <div class="floating-icon" style="--delay: 3s; --top: 70%; --left: 90%;"><i class="fas fa-camera"></i></div>
+        <div class="floating-icon" style="--delay: 2.5s; --top: 40%; --left: 80%;"><i class="fas fa-suitcase"></i></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <div id="navbar"></div>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <div class="glass-card">
+                    <h1 class="hero-title">
+                        <span class="animate-text">Discover</span>
+                        <span class="animate-text">Your Perfect</span>
+                        <span class="animate-text">Journey</span>
+                    </h1>
+                    <p class="hero-subtitle">AI-powered travel planning tailored to your preferences</p>
+                    
+                    <div class="search-container">
+                        <div class="search-box">
+                            <i class="fas fa-robot ai-icon"></i>
+                            <input type="text" placeholder="Where do you dream of going next?" class="search-input">
+                            <button class="search-btn"><i class="fas fa-arrow-right"></i></button>
+                        </div>
+                        <div class="search-tags">
+                            <span class="tag"><i class="fas fa-mountain"></i> Adventure</span>
+                            <span class="tag"><i class="fas fa-umbrella-beach"></i> Relaxation</span>
+                            <span class="tag"><i class="fas fa-utensils"></i> Culinary</span>
+                            <span class="tag"><i class="fas fa-landmark"></i> Cultural</span>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-features">
+                        <div class="feature">
+                            <i class="fas fa-brain"></i>
+                            <span>AI Recommendations</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Smart Itineraries</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-map-marked-alt"></i>
+                            <span>Local Insights</span>
+                        </div>
+                        <!-- Sustainability features removed -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-scroll">
+                <span>Scroll to explore</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title">Smart Features for Better Travel</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <h3>Personalized Profiles</h3>
+                        <p>Create detailed profiles with your travel preferences, dietary needs, and accessibility requirements.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <h3>Smart Budget Planning</h3>
+                        <p>Set your budget and get real-time updates as you plan. Receive alerts for price drops and cheaper alternatives.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-route"></i>
+                        </div>
+                        <h3>AI Itinerary Generator</h3>
+                        <p>Generate optimized day-by-day itineraries based on your preferences, travel time, and real-time availability.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                        <h3>Interactive Builder</h3>
+                        <p>Drag and drop activities, see real-time impacts on your budget and schedule, and resolve conflicts instantly.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-cloud-sun"></i>
+                        </div>
+                        <h3>Real-Time Data</h3>
+                        <p>Access live weather forecasts, transport updates, and disruption handling to keep your trip on track.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-compass"></i>
+                        </div>
+                        <h3>Smart Recommendations</h3>
+                        <p>Discover destinations and activities tailored to your interests, dietary needs, and accessibility requirements.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3>AI Chat Assistant</h3>
+                        <p>Get instant answers about visa requirements, local customs, and real-time travel decisions.</p>
+                    </div>
+                    <!-- Sustainability Focus card removed -->
+                </div>
+            </div>
+        </section>
+
+        <section class="how-it-works">
+            <div class="container">
+                <h2 class="section-title">How It Works</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Create Your Profile</h3>
+                        <p>Tell us about your travel style, preferences, and needs.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Set Your Budget</h3>
+                        <p>Define your total budget and how you want to allocate it.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Choose Destination</h3>
+                        <p>Select from AI-recommended destinations or enter your own.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h3>Generate Itinerary</h3>
+                        <p>Let AI create your perfect day-by-day plan.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <h3>Customize & Finalize</h3>
+                        <p>Make adjustments and finalize your perfect trip.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer removed as requested -->
+    
+    <!-- Toast container for notifications -->
+    <div id="toast-container" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+    
+    <!-- Loading indicator -->
+    <div id="loading-indicator" class="loading-indicator">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Main JS -->
+    <script type="module" src="js/main.js"></script>
+    <script src="script.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itinerary - TravelAI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/trip-details.css">
+    <link rel="stylesheet" href="css/itinerary.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://img.icons8.com/fluency/48/null/airplane-take-off.png" type="image/png">
+</head>
+<body>
+    <!-- Theme toggle moved to navbar -->
+
+    <!-- Navigation Bar -->
+    <div id="navbar"></div>
+    
+    <main>
+        <section class="itinerary-section">
+            <div class="container">
+                <div class="itinerary-header">
+                    <div class="back-link">
+                        <a href="trip-details.html" id="back-to-trip"><i class="fas fa-arrow-left"></i> Back to Trip</a>
+                    </div>
+                    <div class="trip-info" id="trip-info">
+                        <!-- Trip info will be loaded here -->
+                        <div class="loading-small"></div>
+                    </div>
+                    <div class="itinerary-actions">
+                        <button class="btn btn-primary" id="edit-itinerary-btn">
+                            <i class="fas fa-edit"></i> Edit Itinerary
+                        </button>
+                        <button class="btn btn-secondary" id="regenerate-btn">
+                            <i class="fas fa-sync-alt"></i> Regenerate
+                        </button>
+                        <button class="btn btn-danger" id="delete-itinerary-btn">
+                            <i class="fas fa-trash-alt"></i> Delete Itinerary
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="itinerary-metrics">
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-calendar-day"></i>
+                        </div>
+                        <div class="metric-content">
+                            <h4>Days</h4>
+                            <p id="days-count">0</p>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <div class="metric-content">
+                            <h4>Activities</h4>
+                            <p id="activities-count">0</p>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-rupee-sign"></i>
+                        </div>
+                        <div class="metric-content">
+                            <h4>Total Cost</h4>
+                            <p id="total-cost">₹0</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Sustainability metric removed -->
+                </div>
+                
+                <div class="itinerary-content">
+                    <div class="itinerary-sidebar">
+                        <div class="sidebar-header">
+                            <h3>Days</h3>
+                        </div>
+                        <div class="day-list" id="day-list">
+                            <!-- Day list will be loaded here -->
+                            <div class="loading-small"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="day-content" id="day-content">
+                        <!-- Day content will be loaded here -->
+                        <div class="loading">
+                            <div class="spinner"></div>
+                            <p>Loading your itinerary...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Activity details modal -->
+                <div class="modal" id="activity-details-modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 id="activity-details-title">Activity Details</h3>
+                            <button class="modal-close">&times;</button>
+                        </div>
+                        <div class="modal-body" id="activity-details-content">
+                            <!-- Activity details will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <style>
+                    .activity-details {
+                        padding: 10px;
+                    }
+                    
+                    .activity-detail-row {
+                        display: flex;
+                        margin-bottom: 12px;
+                        align-items: flex-start;
+                    }
+                    
+                    .detail-label {
+                        width: 130px;
+                        font-weight: 500;
+                        color: #555;
+                    }
+                    
+                    .detail-label i {
+                        color: #4CAFAB;
+                        width: 20px;
+                        text-align: center;
+                        margin-right: 5px;
+                    }
+                    
+                    .detail-value {
+                        flex: 1;
+                    }
+                    
+                    .sustainability-score {
+                        display: flex;
+                        flex-direction: column;
+                    }
+                    
+                    .score-value {
+                        font-weight: 500;
+                        color: #4CAFAB;
+                    }
+                    
+                    .sustainability-features {
+                        margin-top: 3px;
+                        color: #777;
+                    }
+                    
+                    .activity-description {
+                        margin-top: 15px;
+                        padding-top: 15px;
+                        border-top: 1px solid #eee;
+                    }
+                    
+                    .activity-description h5 {
+                        font-size: 16px;
+                        margin-bottom: 8px;
+                        color: #333;
+                    }
+                    
+                    .activity-actions {
+                        margin-top: 20px;
+                        display: flex;
+                        justify-content: flex-end;
+                        gap: 10px;
+                    }
+                </style>
+                
+                <div class="itinerary-map-container">
+                    <h3>Day Map</h3>
+                    <div class="itinerary-map" id="itinerary-map"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Regenerate Itinerary Modal -->
+    <div class="modal" id="regenerate-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Regenerate Itinerary</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Regenerating the itinerary will replace your current itinerary with a new AI-generated one. You can customize the generation with the options below.</p>
+                
+                <form id="regenerate-form">
+                    <div class="form-group">
+                        <label for="activity-level">Activity Level</label>
+                        <select id="activity-level" name="activityLevel">
+                            <option value="relaxed">Relaxed - Fewer activities, more downtime</option>
+                            <option value="moderate" selected>Moderate - Balanced schedule</option>
+                            <option value="intense">Intense - Packed schedule, maximum activities</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Focus Areas</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="focus" value="cultural" checked> Cultural Experiences
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="focus" value="nature"> Nature & Outdoors
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="focus" value="food"> Food & Dining
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="focus" value="shopping"> Shopping
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="focus" value="relaxation"> Relaxation
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="focus" value="adventure"> Adventure & Activities
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Sustainability priority removed -->
+                    
+                    <div class="form-group">
+                        <label for="special-instructions">Special Instructions (Optional)</label>
+                        <textarea id="special-instructions" name="specialInstructions" rows="3" placeholder="Any specific requests or preferences for your itinerary"></textarea>
+                    </div>
+                    
+                    <div id="regenerate-error" class="error-message"></div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="cancel-regenerate-btn">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Generate New Itinerary</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Activity Modal -->
+    <div class="modal itinerary-modal" id="edit-activity-modal">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Edit Activity</h3>
+                    <button class="btn-close modal-close" type="button" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="edit-activity-form" novalidate>
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label class="form-label">Activity Title <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="edit-activity-title" name="title" placeholder="Explore Goa" required>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label">Description</label>
+                                <textarea class="form-control" id="edit-activity-description" name="description" rows="3" placeholder="Discover the highlights of Goa..."></textarea>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Location <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="edit-activity-location" name="location" placeholder="Goa City Center" required>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Cost (₹)</label>
+                                <input type="number" step="0.01" class="form-control" id="edit-activity-cost" name="cost" placeholder="750">
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Duration (minutes)</label>
+                                <input type="number" class="form-control" id="edit-activity-duration" name="duration" placeholder="180">
+                            </div>
+
+                            <div class="col-md-4 edit-activity-category-field">
+                                <label class="form-label">Category</label>
+                                <select class="form-select" id="edit-activity-category" name="category">
+                                    <option value="sightseeing">Sightseeing</option>
+                                    <option value="travel">Travel</option>
+                                    <option value="hotel">Hotel</option>
+                                    <option value="activity">Activity</option>
+                                    <option value="food">Food</option>
+                                    <option value="shopping">Shopping</option>
+                                </select>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label">Notes (optional)</label>
+                                <input type="text" class="form-control" id="edit-activity-notes" name="notes" placeholder="Any extra notes for this activity">
+                            </div>
+                        </div>
+
+                        <div id="edit-activity-error" class="error-message mt-3"></div>
+
+                        <div class="form-actions mt-4 d-flex justify-content-end gap-2">
+                            <button type="button" class="btn btn-secondary" id="edit-activity-cancel">Cancel</button>
+                            <button type="submit" class="btn btn-primary" id="edit-activity-save">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer removed as requested -->
+    
+    <!-- Toast container for notifications -->
+    <div id="toast-container" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+    
+    <!-- Loading indicator -->
+    <div id="loading-indicator" class="loading-indicator">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    
+    <!-- Include Leaflet.js for maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    
+    <!-- Leaflet Plugins -->
+    <script src="https://unpkg.com/leaflet-polylinedecorator@1.6.0/dist/leaflet.polylineDecorator.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@2.4.0/Control.FullScreen.css" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@2.4.0/Control.FullScreen.js"></script>
+    
+    <!-- Custom map styles -->
+    <style>
+        .custom-div-icon {
+            background: none;
+            border: none;
+        }
+        
+        /* Time indicators removed as requested */
+        
+        .activity-popup {
+            max-width: 280px;
+        }
+        
+        .activity-popup h4 {
+            color: #4CAFAB;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .activity-popup p {
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+        
+        .activity-popup i {
+            color: #4CAFAB;
+            margin-right: 5px;
+            width: 15px;
+        }
+        
+        .popup-actions {
+            margin-top: 10px;
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .activity-marker-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+        }
+        
+        .activity-marker-container i {
+            font-size: 30px;
+            color: white;
+            background-color: #4CAFAB;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+            border: 2px solid white;
+        }
+        
+        .activity-number {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #FF5733;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            border: 2px solid white;
+            z-index: 1000;
+        }
+        
+        /* Activity types legend removed as requested */
+        
+        /* Day information panel removed as requested */
+        
+        .no-activities-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+        }
+        
+        .destination-marker {
+            z-index: 500 !important;
+        }
+        
+        .destination-marker-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .destination-marker-container i {
+            font-size: 36px;
+            color: white;
+            background-color: #FF5733;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.5);
+            border: 3px solid white;
+        }
+        
+        .destination-popup h4 {
+            color: #FF5733;
+            margin-bottom: 5px;
+        }
+    </style>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Main JS -->
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/itinerary.js"></script>
+</body>
+</html>
